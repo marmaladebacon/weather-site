@@ -18,7 +18,7 @@ const weatherAPI = {
         position.lng
       }&units=metric&APPID=${APPID}`
     );
-    return data
+    return data;
   },
 
   getIconUrl(icon: string) {

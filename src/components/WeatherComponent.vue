@@ -28,7 +28,7 @@ export default class WeatherComponent extends Vue {
     return weatherAPI.getIconUrl(this.icon);
   }
   get style(){
-    return `style="max-width: ${this.width}rem;"`;
+    return `max-width: ${this.width}rem;`;
   }
 }
 </script>
