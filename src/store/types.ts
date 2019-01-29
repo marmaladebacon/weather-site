@@ -3,6 +3,12 @@ export type Position = {
   lng: number;
 };
 
+export type WeatherBlob = {
+  date: string;
+  weather: string;
+  icon: string;
+};
+
 export interface RootState {
   position: Position;
-}
+};

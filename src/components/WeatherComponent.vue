@@ -1,6 +1,11 @@
 <template>
   <div>
-    <b-card :img-src="iconUrl"> </b-card>
+    <b-card 
+      :title="date"
+      :img-src="iconUrl"
+      :style="style"
+      > 
+    </b-card>
   </div>
 </template>
 <script lang="ts">
@@ -16,9 +21,14 @@ export default class WeatherComponent extends Vue {
   weather!: string;
   @Prop(String)
   icon!: string;
+  @Prop(Number)
+  width!: number;
 
   get iconUrl() {
     return weatherAPI.getIconUrl(this.icon);
+  }
+  get style(){
+    return `style="max-width: ${this.width}rem;"`;
   }
 }
 </script>

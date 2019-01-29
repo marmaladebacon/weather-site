@@ -71,7 +71,7 @@ export default class MapComponent extends Vue {
       this.map.setZoom(12);
       //this.map.setCenter(this.marker.getPosition());
     });
-    this.$store.dispatch(`${this.namespace}/updatePosition`, latLng);
+    this.$store.commit(`${this.namespace}/setPosition`, latLng);
   }
 }
 </script>

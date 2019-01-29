@@ -1,5 +1,6 @@
 import axios from "axios";
 import weatherAPI from "../utils/weatherAPI";
+import {Position} from "../store/types";
 //open weather app id.  ideally place it in an environment variable
 const APPID = "e7c35c7ebb985f498eceae6b60aac2de";
 const rootUrl = "http://api.openweathermap.org/data/2.5/";
@@ -26,7 +27,7 @@ const mapComponentStoreModule = {
   },
 
   mutations: {
-    setPosition(state: any, position: { lat: number; lng: number }) {
+    setPosition(state: any, position: Position) {
       state.position = position;
       //api.openweathermap.org/data/2.5/weather?lat=35&lon=139&APPID=e7c35c7ebb985f498eceae6b60aac2de
     },
