@@ -10,9 +10,9 @@ export default new Router({
       path: "/",
       name: "home",
       component: Home,
-      props: (route) => ({
+      props: route => ({
         //incoming position
-      }),
+      })
     },
     {
       path: "/about",

@@ -9,8 +9,8 @@ import Vue from "vue";
 import Component from "vue-class-component";
 import {} from "googlemaps";
 import mapComponentStoreModule from "./mapComponentStoreModule";
-import { Prop } from 'vue-property-decorator';
-import { namespace } from 'vuex-class';
+import { Prop } from "vue-property-decorator";
+import { namespace } from "vuex-class";
 
 @Component
 export default class MapComponent extends Vue {

@@ -1,9 +1,8 @@
-
 export type Position = {
-  lat: number,
-  lng: number,
+  lat: number;
+  lng: number;
 };
 
 export interface RootState {
-  position: Position
+  position: Position;
 }
