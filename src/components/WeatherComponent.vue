@@ -1,15 +1,10 @@
 <template>
   <div>
-    <b-card 
-      :title="date"
-      :img-src="iconUrl"
-      :style="style"
-      img-top
-      >
-    <p class="card-text smaller-text" :style="textStyle">
-      {{weather}} {{cityName}}
-      {{countryName}}
-    </p>
+    <b-card :title="date" :img-src="iconUrl" :style="style" img-top>
+      <p class="card-text smaller-text" :style="textStyle">
+        {{ weather }} {{ cityName }}
+        {{ countryName }}
+      </p>
     </b-card>
   </div>
 </template>
@@ -45,30 +40,29 @@ export default class WeatherComponent extends Vue {
   city!: string;
 
   @Prop(String)
-  country: string = 'GB';
-
+  country: string = "GB";
 
   get iconUrl() {
     return weatherAPI.getIconUrl(this.icon);
   }
-  get style(){
+  get style() {
     return `width: ${this.width}vw; height: ${this.height}vh;`;
   }
 
-  get textStyle(){
+  get textStyle() {
     return `font-size: ${this.fontSize}rem;`;
   }
 
-  get cityName():string{
-    if(this.city !== 'Earth' && this.city !== ''){
+  get cityName(): string {
+    if (this.city !== "Earth" && this.city !== "") {
       return `in ${this.city}, `;
     }
-    return 'on Earth';
+    return "on Earth";
   }
 
-  get countryName():string{
-    if(this.country && this.country !== ''){
-      return countries.getName(this.country, 'en');
+  get countryName(): string {
+    if (this.country && this.country !== "") {
+      return countries.getName(this.country, "en");
     }
     return this.country;
   }
@@ -76,17 +70,17 @@ export default class WeatherComponent extends Vue {
 </script>
 <style scoped>
 .card-img-top {
-  width: 70%; 
-  height: 8vh; 
+  width: 70%;
+  height: 8vh;
   object-fit: cover;
   align-self: center;
 }
 
-.smaller-text{
+.smaller-text {
   font-size: 0.7rem;
 }
 
-.card-body{
+.card-body {
   padding: 0.15rem;
 }
 

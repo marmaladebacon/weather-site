@@ -9,7 +9,6 @@
 </template>
 
 <style>
-
 body {
   background-color: aliceblue;
 }

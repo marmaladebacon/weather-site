@@ -13,4 +13,4 @@ export type WeatherBlob = {
 
 export interface RootState {
   position: Position;
-};
+}
