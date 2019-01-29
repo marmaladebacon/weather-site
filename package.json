@@ -10,9 +10,12 @@
   },
   "dependencies": {
     "@types/googlemaps": "^3.30.16",
+    "@types/lodash-es": "^4.17.1",
     "axios": "^0.18.0",
     "bootstrap-vue": "^2.0.0-rc.11",
     "express": "^4.16.4",
+    "i18n-iso-countries": "^3.7.8",
+    "lodash-es": "^4.17.11",
     "vue": "^2.5.21",
     "vue-class-component": "^6.0.0",
     "vue-property-decorator": "^7.0.0",

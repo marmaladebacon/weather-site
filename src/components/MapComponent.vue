@@ -18,9 +18,6 @@ export default class MapComponent extends Vue {
   namespace!: string;
   map: any;
   marker: any;
-  created() {
-    this.$store.registerModule(this.namespace, mapComponentStoreModule);
-  }
 
   mounted() {
     const mapOptions = {
@@ -39,8 +36,7 @@ export default class MapComponent extends Vue {
         const pos = {
           lat: position.coords.latitude,
           lng: position.coords.longitude
-        };
-        //this.map.setCenter(pos);
+        };        
         this.map.setZoom(6);
 
         this.map.addListener("click", (evt: any) => {
@@ -68,16 +64,20 @@ export default class MapComponent extends Vue {
     });
     this.map.panTo(latLng);
     this.marker.addListener("click", () => {
-      this.map.setZoom(12);
-      //this.map.setCenter(this.marker.getPosition());
+      if( this.map.getZoom() > 10){
+        this.map.setZoom(12); 
+      }else{
+        this.map.setZoom(5);
+      }
+      
     });
-    this.$store.commit(`${this.namespace}/setPosition`, latLng);
+    this.$store.commit(`setPosition`, latLng);
   }
 }
 </script>
 <style scoped>
 .map {
-  width: 400px;
-  height: 400px;
+  width: 40vw;
+  height: 60vh;
 }
 </style>
