@@ -1,6 +1,6 @@
 <template>
   <div>
-    <MapComponent></MapComponent>    
+    <MapComponent></MapComponent>
   </div>
 </template>
 
