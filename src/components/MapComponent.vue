@@ -8,14 +8,18 @@
 import Vue from "vue";
 import Component from "vue-class-component";
 import {} from "googlemaps";
-import mapComponentState from "./mapComponentState";
+import mapComponentStoreModule from "./mapComponentStoreModule";
+import { Prop } from 'vue-property-decorator';
+import { namespace } from 'vuex-class';
 
 @Component
 export default class MapComponent extends Vue {
+  @Prop(String)
+  namespace!: string;
   map: any;
   marker: any;
   created() {
-    this.$store.registerModule("mapState", mapComponentState);
+    this.$store.registerModule(this.namespace, mapComponentStoreModule);
   }
 
   mounted() {
@@ -67,7 +71,7 @@ export default class MapComponent extends Vue {
       this.map.setZoom(12);
       //this.map.setCenter(this.marker.getPosition());
     });
-    this.$store.dispatch("mapState/updatePosition", latLng);
+    this.$store.dispatch(`${this.namespace}/updatePosition`, latLng);
   }
 }
 </script>
