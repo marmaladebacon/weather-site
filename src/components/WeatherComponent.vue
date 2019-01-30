@@ -1,6 +1,10 @@
 <template>
-  <div>
-    <b-card :title="date" :img-src="iconUrl" :style="style" img-top>
+  
+  <div >
+    <div v-if="errorPresent">
+      <h4>Apologies but we have encountered an error during the fetch</h4>
+    </div>
+    <b-card :title="date" :img-src="iconUrl" :style="style" img-top v-else>
       <p class="card-text smaller-text" :style="textStyle">
         {{ temperature }}
       </p>
@@ -48,6 +52,9 @@ export default class WeatherComponent extends Vue {
   @Prop(String)
   country!: string;
 
+  @Prop(Boolean)
+  error!: boolean;
+
   get iconUrl() {
     return weatherAPI.getIconUrl(this.icon);
   }
@@ -71,6 +78,10 @@ export default class WeatherComponent extends Vue {
       return countries.getName(this.country, "en");
     }
     return this.country;
+  }
+
+  get errorPresent(): boolean{
+    return this.error;
   }
 }
 </script>

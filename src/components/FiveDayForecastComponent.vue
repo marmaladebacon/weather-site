@@ -1,18 +1,23 @@
 <template>
-  <b-row style="five-day-row">
-    <b-col
-      cols="2"
-      v-for="(weatherData, index) in weatherDataItems"
-      :key="index"
-    >
-      <WeatherComponent
-        v-bind="weatherData"
-        :width="10"
-        :height="10"
-        :font-size="0.5"
-      ></WeatherComponent>
-    </b-col>
-  </b-row>
+  <div>
+    <div v-if="fetchError">
+      Apologies, we have encountered an error fetching data
+    </div>
+    <b-row style="five-day-row" v-else>
+      <b-col
+        cols="2"
+        v-for="(weatherData, index) in weatherDataItems"
+        :key="index"      
+      >
+        <WeatherComponent
+          v-bind="weatherData"
+          :width="10"
+          :height="10"
+          :font-size="0.5"          
+        ></WeatherComponent>
+      </b-col>
+    </b-row>
+  </div>
 </template>
 <script lang="ts">
 import Vue from "vue";
@@ -29,6 +34,7 @@ import WeatherComponent from "./WeatherComponent.vue";
 })
 export default class FiveDataForecastComponent extends Vue {
   weatherDataItems: WeatherBlob[] = [];
+  errorFetching: boolean = false;
   @Prop(Object)
   position!: Position;
   mounted() {
@@ -44,7 +50,13 @@ export default class FiveDataForecastComponent extends Vue {
     //Future enhancement, debounce to limit requests
     return weatherAPI
       .getFiveDayForecast({ lat: currPosition.lat, lng: currPosition.lng })
-      .then(response => {
+      .then((response:any) => {
+        if(response.error){
+          this.errorFetching = true;
+          return;
+        }
+        this.errorFetching = false;
+
         const list = response.data.list;
 
         let city = get(response.data, ["city", "name"], "");
@@ -81,10 +93,15 @@ export default class FiveDataForecastComponent extends Vue {
             weather: e.weather[0].main,
             icon: e.weather[0].icon,
             city,
-            country
+            country,
+            error: false,
           };
         });
       });
+  }
+
+  get fetchError(){
+    return this.errorFetching;
   }
 }
 </script>

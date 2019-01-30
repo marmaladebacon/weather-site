@@ -10,6 +10,7 @@ export type WeatherBlob = {
   icon: string;
   city: string;
   country: string;
+  error: boolean;
 };
 
 export interface RootState {

@@ -80,13 +80,19 @@ export default class Home extends Vue {
     icon: "10n",
     city: "london",
     temperature: "0-5",
-    country: "GB"
+    country: "GB",
+    error: false,
   };
 
   @Watch("position")
   onPositionChanged(currVal: Position) {
     weatherAPI.getCurrentWeather(currVal).then((response: any) => {
-      console.log(currVal);
+      if(response.error){
+        this.weatherData.error = true;
+        return;
+      }
+      
+      this.weatherData.error = false;
       this.weatherData.date = "Now";
       this.weatherData.weather = response.data.weather[0].description;
       this.weatherData.icon = response.data.weather[0].icon;
