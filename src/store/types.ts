@@ -6,6 +6,7 @@ export type Position = {
 export type WeatherBlob = {
   date: string;
   weather: string;
+  temperature: string;
   icon: string;
   city: string;
   country: string;

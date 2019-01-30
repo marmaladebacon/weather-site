@@ -13,11 +13,7 @@
         </b-col>
         <b-col cols="2" align-v="center" align-h="start">
           <WeatherComponent
-            :date="weatherData.date"
-            :weather="weatherData.weather"
-            :icon="weatherData.icon"
-            :city="weatherData.city"
-            :country="weatherData.country"
+            v-bind="weatherData"
             width="25"
             height="50"
             font-size="0.8"
@@ -51,23 +47,26 @@ export default class Home extends Vue {
   @State position!: Position;
 
   weatherData: WeatherBlob = {
-    date: "2019-1-25",
-    weather: "rain",
-    icon: "10n",
-    city: "london",
-    country: "GB"
+    date: '2019-1-25',
+    weather: 'rain',
+    icon: '10n',
+    city: 'london',
+    temperature: '0-5',
+    country: 'GB',
   };
 
   @Watch("position")
   onPositionChanged(currVal: Position) {
     weatherAPI.getCurrentWeather(currVal).then((response: any) => {
+      console.log(currVal);
       this.weatherData.date = 'Now';
       this.weatherData.weather = response.data.weather[0].description;
       this.weatherData.icon = response.data.weather[0].icon;
       this.weatherData.country = response.data.sys.country
         ? response.data.sys.country
-        : "";
+        : '';
       this.weatherData.city = response.data.name;
+      this.weatherData.temperature = `${response.data.main.temp_min}°C to ${response.data.main.temp_max}°C`;
     });
   }
 

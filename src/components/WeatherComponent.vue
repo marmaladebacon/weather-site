@@ -2,7 +2,10 @@
   <div>
     <b-card :title="date" :img-src="iconUrl" :style="style" img-top>
       <p class="card-text smaller-text" :style="textStyle">
-        {{ weather }} {{ cityName }}<br/>
+        {{temperature}}        
+      </p>
+      <p class="card-text smaller-text" :style="textStyle">
+        {{ weather }} {{ cityName }}
         {{ countryName }}
       </p>
     </b-card>
@@ -35,6 +38,9 @@ export default class WeatherComponent extends Vue {
 
   @Prop(Number)
   fontSize!: number;
+
+  @Prop(String)
+  temperature!: string;
 
   @Prop(String)
   city!: string;

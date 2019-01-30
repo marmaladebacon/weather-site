@@ -6,11 +6,7 @@
       :key="index"
     >
       <WeatherComponent
-        :date="weatherData.date"
-        :weather="weatherData.weather"
-        :icon="weatherData.icon"
-        :city="weatherData.city"
-        :country="weatherData.country"
+        v-bind="weatherData"
         width="10"
         height="10"
         font-size="0.5"
@@ -54,13 +50,13 @@ export default class FiveDataForecastComponent extends Vue {
         
         const list = response.data.list;
 
-        let city = get(response.data, ["city", "name"], "");
-        let country = get(response.data, ["city", "country"], "");
+        let city = get(response.data, ['city', 'name'], '');
+        let country = get(response.data, ['city', 'country'], '');
 
         let dateToIgnore = list[0].dt_txt.split(" ")[0];
 
         let result = list.filter((e: any) => {
-          let dateTextArray = e.dt_txt.split(" ");
+          let dateTextArray = e.dt_txt.split(' ');
           let dateText = dateTextArray[0];
           if (dateText !== dateToIgnore) {
             if (dateTextArray[1] === "09:00:00") {
@@ -75,7 +71,8 @@ export default class FiveDataForecastComponent extends Vue {
         
         this.weatherDataItems = result.map((e: any) => {
           return {
-            date: e.dt_txt,
+            date: `${e.dt_txt.split(' ')[0]}` ,
+            temperature: `${e.main.temp_min}°C to ${e.main.temp_max}°C`,
             weather: e.weather[0].main,
             icon: e.weather[0].icon,
             city,
