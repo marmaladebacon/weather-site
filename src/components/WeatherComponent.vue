@@ -2,7 +2,7 @@
   <div>
     <b-card :title="date" :img-src="iconUrl" :style="style" img-top>
       <p class="card-text smaller-text" :style="textStyle">
-        {{temperature}}        
+        {{ temperature }}
       </p>
       <p class="card-text smaller-text" :style="textStyle">
         {{ weather }} {{ cityName }}

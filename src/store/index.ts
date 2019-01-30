@@ -11,7 +11,7 @@ const state: RootState = {
     lat: 0,
     lng: 0
   },
-  savedPositions:[],
+  savedPositions: []
 };
 
 const mutations: MutationTree<RootState> = {

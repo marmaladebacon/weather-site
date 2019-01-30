@@ -1,8 +1,11 @@
 <template>
-  <div>    
+  <div>
     <b-container>
       <div v-for="(item, index) in getSavedPositions" :key="index">
-        <FiveDayForecastComponent class="spacing" :position="item"></FiveDayForecastComponent>
+        <FiveDayForecastComponent
+          class="spacing"
+          :position="item"
+        ></FiveDayForecastComponent>
       </div>
     </b-container>
   </div>
@@ -22,19 +25,19 @@ import { Position } from "../store/types";
 export default class SavedLocations extends Vue {
   @State savedPositions!: Position[];
 
-  mounted(){
-    console.log('Saved Locations mounted');
+  mounted() {
+    console.log("Saved Locations mounted");
     console.log(this.savedPositions);
   }
 
-  get getSavedPositions(): Position[]{
+  get getSavedPositions(): Position[] {
     return this.savedPositions;
   }
 }
 </script>
 <style scoped>
-  .spacing{
-    padding-top: 10px;
-    padding-bottom: 10px;
-  }
+.spacing {
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
 </style>

@@ -31,14 +31,13 @@ export default class MapComponent extends Vue {
 
     if ("geolocation" in navigator) {
       navigator.geolocation.getCurrentPosition((position: any) => {
-        
         const pos = {
           lat: position.coords.latitude,
           lng: position.coords.longitude
         };
         this.map.setZoom(6);
 
-        this.map.addListener("click", (evt: any) => {          
+        this.map.addListener("click", (evt: any) => {
           this.placeMarkerAndPanTo(
             { lat: evt.latLng.lat(), lng: evt.latLng.lng() },
             this.map
@@ -61,15 +60,24 @@ export default class MapComponent extends Vue {
     });
     this.map.panTo(latLng);
     this.marker.addListener("click", () => {
-      this.map.setZoom(5);      
+      this.map.setZoom(5);
     });
     this.$store.commit(`setPosition`, latLng);
   }
 }
 </script>
 <style scoped>
-.map {
-  width: 40vw;
+
+.map{
+  width:32vw;
   height: 60vh;
 }
+
+@media (max-width: 800px) {
+  .map {
+    width: 45vw;
+    height: 60vh;
+  }
+}
+
 </style>

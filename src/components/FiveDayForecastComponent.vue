@@ -28,11 +28,11 @@ import WeatherComponent from "./WeatherComponent.vue";
   }
 })
 export default class FiveDataForecastComponent extends Vue {
-  weatherDataItems: WeatherBlob[] = [];  
+  weatherDataItems: WeatherBlob[] = [];
   @Prop(Object)
   position!: Position;
   mounted() {
-    console.log('Mounted Five DB');
+    console.log("Mounted Five DB");
     console.log(this.position);
     this.updateCard(this.position);
   }
@@ -40,23 +40,21 @@ export default class FiveDataForecastComponent extends Vue {
   @Watch("position")
   onPositionChanged(currPosition: Position) {
     this.updateCard(currPosition);
-    
   }
 
-  updateCard(currPosition: Position){
+  updateCard(currPosition: Position) {
     weatherAPI
       .getFiveDayForecast({ lat: currPosition.lat, lng: currPosition.lng })
       .then(response => {
-        
         const list = response.data.list;
 
-        let city = get(response.data, ['city', 'name'], '');
-        let country = get(response.data, ['city', 'country'], '');
+        let city = get(response.data, ["city", "name"], "");
+        let country = get(response.data, ["city", "country"], "");
 
         let dateToIgnore = list[0].dt_txt.split(" ")[0];
 
         let result = list.filter((e: any) => {
-          let dateTextArray = e.dt_txt.split(' ');
+          let dateTextArray = e.dt_txt.split(" ");
           let dateText = dateTextArray[0];
           if (dateText !== dateToIgnore) {
             if (dateTextArray[1] === "09:00:00") {
@@ -68,10 +66,10 @@ export default class FiveDataForecastComponent extends Vue {
         });
 
         result.unshift(list[0]);
-        
+
         this.weatherDataItems = result.map((e: any) => {
           return {
-            date: `${e.dt_txt.split(' ')[0]}` ,
+            date: `${e.dt_txt.split(" ")[0]}`,
             temperature: `${e.main.temp_min}°C to ${e.main.temp_max}°C`,
             weather: e.weather[0].main,
             icon: e.weather[0].icon,

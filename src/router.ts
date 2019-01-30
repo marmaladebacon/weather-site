@@ -14,7 +14,7 @@ export default new Router({
       props: route => ({
         //incoming position
       })
-    },    
+    },
     {
       path: "/about",
       name: "about",
@@ -27,7 +27,7 @@ export default new Router({
     {
       path: "/savedlocations",
       name: "savedLocations",
-      component:SavedLocations,
+      component: SavedLocations
     }
   ]
 });

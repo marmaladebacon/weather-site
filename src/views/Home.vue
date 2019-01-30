@@ -21,7 +21,9 @@
         </b-col>
       </b-row>
       <b-row class="five-day">
-        <FiveDayForecastComponent :position="position"></FiveDayForecastComponent>
+        <FiveDayForecastComponent
+          :position="position"
+        ></FiveDayForecastComponent>
       </b-row>
     </b-container>
   </div>
@@ -47,31 +49,36 @@ export default class Home extends Vue {
   @State position!: Position;
 
   weatherData: WeatherBlob = {
-    date: '2019-1-25',
-    weather: 'rain',
-    icon: '10n',
-    city: 'london',
-    temperature: '0-5',
-    country: 'GB',
+    date: "2019-1-25",
+    weather: "rain",
+    icon: "10n",
+    city: "london",
+    temperature: "0-5",
+    country: "GB"
   };
 
   @Watch("position")
   onPositionChanged(currVal: Position) {
     weatherAPI.getCurrentWeather(currVal).then((response: any) => {
       console.log(currVal);
-      this.weatherData.date = 'Now';
+      this.weatherData.date = "Now";
       this.weatherData.weather = response.data.weather[0].description;
       this.weatherData.icon = response.data.weather[0].icon;
       this.weatherData.country = response.data.sys.country
         ? response.data.sys.country
-        : '';
+        : "";
       this.weatherData.city = response.data.name;
-      this.weatherData.temperature = `${response.data.main.temp_min}°C to ${response.data.main.temp_max}°C`;
+      this.weatherData.temperature = `${response.data.main.temp_min}°C to ${
+        response.data.main.temp_max
+      }°C`;
     });
   }
 
-  saveLocation(){    
-    this.$store.commit('addToSavedPositions', {lat: this.position.lat, lng: this.position.lng});
+  saveLocation() {
+    this.$store.commit("addToSavedPositions", {
+      lat: this.position.lat,
+      lng: this.position.lng
+    });
   }
 }
 </script>
@@ -82,6 +89,18 @@ export default class Home extends Vue {
   right: 32.5vw;
   top: 58vh;
 }
+@media (min-width: 1080px){
+  .btn-save {
+    right: 40vw;
+  }
+}
+
+@media (max-width: 800px) {
+  .btn-save {
+    right: 16.5vw;
+  }
+}
+
 .pos-debug {
   position: absolute;
   right: 5vw;
