@@ -10,17 +10,15 @@
     >
       <p>
         Saved location {{ position.lat }}, {{ position.lng }}
-        {{ countDown }} seconds...
       </p>
       <b-progress
-        variant="warning"
+        variant="info"
         :max="maxNotifyLifetime"
-        :value="notifyCountdown"
+        :value="notifyProgress"
         height="4px"
       >
       </b-progress>
     </b-alert>
-    <div class="pos-debug">{{ savedPosition.lat }},{{ savedPosition.lng }}</div>
     <div class="btn-save">
       <b-button v-on:click="saveLocation" :size="sm" :variant="primary">
         Save Location
@@ -121,6 +119,10 @@ export default class Home extends Vue {
       lng: this.position.lng
     };
   }
+
+  get notifyProgress():number{
+    return this.maxNotifyLifetime - this.notifyCountdown + 1;
+  }
 }
 </script>
 <style scoped>
@@ -148,12 +150,6 @@ export default class Home extends Vue {
   }
 }
 
-.pos-debug {
-  position: absolute;
-  right: 5vw;
-  top: 5vh;
-  border: 1px black solid;
-}
 .five-day {
   padding-top: 5px;
   height: 10vh;

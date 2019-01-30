@@ -7,9 +7,9 @@
     >
       <WeatherComponent
         v-bind="weatherData"
-        width="10"
-        height="10"
-        font-size="0.5"
+        :width="10"
+        :height="10"
+        :font-size="0.5"
       ></WeatherComponent>
     </b-col>
   </b-row>
@@ -41,6 +41,7 @@ export default class FiveDataForecastComponent extends Vue {
   }
 
   updateCard(currPosition: Position) {
+    //Future enhancement, debounce to limit requests
     return weatherAPI
       .getFiveDayForecast({ lat: currPosition.lat, lng: currPosition.lng })
       .then(response => {
