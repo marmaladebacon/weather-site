@@ -12,7 +12,6 @@ const weatherAPI = {
     );
   },
   async getFiveDayForecast(position: Position) {
-    //http://api.openweathermap.org/data/2.5/forecast?lat=35&lon=139&units=metric&appid=e7c35c7ebb985f498eceae6b60aac2de
     const data = await axios.get(
       `${rootUrl}forecast?lat=${position.lat}&lon=${
         position.lng

@@ -53,6 +53,8 @@ export default class FiveDataForecastComponent extends Vue {
 
         let dateToIgnore = list[0].dt_txt.split(" ")[0];
 
+        // filter the array such that we only take the 9am forecast
+        // to display a consistent time for all days going forward
         let result = list.filter((e: any) => {
           let dateTextArray = e.dt_txt.split(" ");
           let dateText = dateTextArray[0];
@@ -65,7 +67,13 @@ export default class FiveDataForecastComponent extends Vue {
           return false;
         });
 
+        // Readd 'nowish' forecast
         result.unshift(list[0]);
+
+        // observed getting more than 5 results, truncate it
+        if(result.length > 5){
+          result = result.slice(0,5)
+        }
 
         this.weatherDataItems = result.map((e: any) => {
           return {

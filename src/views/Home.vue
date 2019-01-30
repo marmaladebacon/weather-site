@@ -1,6 +1,19 @@
 <template>
   <div>
-    <div class="pos-debug">{{ position.lat }},{{ position.lng }}</div>
+    <b-alert class="fixed-alert"
+            :show="notifyCountdown"
+             dismissible
+             variant="success"
+             @dismissed="notifyCountdown=0"
+             @dismiss-count-down="countDownChanged">
+      <p>Saved location {{position.lat}}, {{position.lng}} {{countDown}} seconds...</p>
+      <b-progress variant="warning"
+                  :max="maxNotifyLifetime"
+                  :value="notifyCountdown"
+                  height="4px">
+      </b-progress>
+    </b-alert>
+    <div class="pos-debug">{{ savedPosition.lat }},{{ savedPosition.lng }}</div>
     <div class="btn-save">
       <b-button v-on:click="saveLocation" :size="sm" :variant="primary">
         Save Location
@@ -26,6 +39,7 @@
         ></FiveDayForecastComponent>
       </b-row>
     </b-container>
+
   </div>
 </template>
 
@@ -47,6 +61,14 @@ import weatherAPI from "../utils/weatherAPI";
 })
 export default class Home extends Vue {
   @State position!: Position;
+
+  maxNotifyLifetime: number = 2;
+  notifyCountdown: number = 0;
+  showDismissibleAlert: boolean = false;
+  savedPosition:Position = {
+    lat:0,
+    lng:0,
+  };
 
   weatherData: WeatherBlob = {
     date: "2019-1-25",
@@ -79,10 +101,29 @@ export default class Home extends Vue {
       lat: this.position.lat,
       lng: this.position.lng
     });
+    this.notifyUserLocationSaved(this.position);
+  }
+
+  countDownChanged (notifyCountdown:number) {
+    this.notifyCountdown = notifyCountdown;
+  }
+
+  notifyUserLocationSaved (position:Position) {
+    this.notifyCountdown = this.maxNotifyLifetime;
+    this.savedPosition = {
+      lat: this.position.lat,
+      lng: this.position.lng
+    };
   }
 }
 </script>
 <style scoped>
+.fixed-alert {
+  position:fixed;
+  top: 0vh;
+  left: 0vw;
+  width: 100%;
+}
 .btn-save {
   z-index: 1000;
   position: absolute;

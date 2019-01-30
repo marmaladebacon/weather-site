@@ -28,7 +28,7 @@ export default class MapComponent extends Vue {
       zoom: 4
     };
     this.map = new google.maps.Map(this.$refs.map as Element, mapOptions);
-
+    // Execute only if we can find the geolocation module
     if ("geolocation" in navigator) {
       navigator.geolocation.getCurrentPosition((position: any) => {
         const pos = {
@@ -37,16 +37,24 @@ export default class MapComponent extends Vue {
         };
         this.map.setZoom(6);
 
-        this.map.addListener("click", (evt: any) => {
-          this.placeMarkerAndPanTo(
-            { lat: evt.latLng.lat(), lng: evt.latLng.lng() },
-            this.map
-          );
-        });
-
         this.placeMarkerAndPanTo(pos, this.map);
       });
+    }else{
+      // default to a fixed location if we cannot
+      const pos = {
+        lat: 61.180059,
+        lng: -149.822075
+      }
+      this.map.setZoom(6);
+      this.placeMarkerAndPanTo(pos, this.map);
     }
+
+    this.map.addListener("click", (evt: any) => {
+      this.placeMarkerAndPanTo(
+        { lat: evt.latLng.lat(), lng: evt.latLng.lng() },
+        this.map
+      );
+    });
   }
 
   placeMarkerAndPanTo(latLng: any, map: any) {
