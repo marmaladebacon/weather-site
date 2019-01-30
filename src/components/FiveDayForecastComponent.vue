@@ -7,13 +7,13 @@
       <b-col
         cols="2"
         v-for="(weatherData, index) in weatherDataItems"
-        :key="index"      
+        :key="index"
       >
         <WeatherComponent
           v-bind="weatherData"
           :width="10"
           :height="10"
-          :font-size="0.5"          
+          :font-size="0.5"
         ></WeatherComponent>
       </b-col>
     </b-row>
@@ -50,8 +50,8 @@ export default class FiveDataForecastComponent extends Vue {
     //Future enhancement, debounce to limit requests
     return weatherAPI
       .getFiveDayForecast({ lat: currPosition.lat, lng: currPosition.lng })
-      .then((response:any) => {
-        if(response.error){
+      .then((response: any) => {
+        if (response.error) {
           this.errorFetching = true;
           return;
         }
@@ -94,13 +94,13 @@ export default class FiveDataForecastComponent extends Vue {
             icon: e.weather[0].icon,
             city,
             country,
-            error: false,
+            error: false
           };
         });
       });
   }
 
-  get fetchError(){
+  get fetchError() {
     return this.errorFetching;
   }
 }

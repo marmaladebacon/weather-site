@@ -8,9 +8,7 @@
       @dismissed="notifyCountdown = 0"
       @dismiss-count-down="countDownChanged"
     >
-      <p>
-        Saved location {{ position.lat }}, {{ position.lng }}
-      </p>
+      <p>Saved location {{ position.lat }}, {{ position.lng }}</p>
       <b-progress
         variant="info"
         :max="maxNotifyLifetime"
@@ -81,17 +79,17 @@ export default class Home extends Vue {
     city: "london",
     temperature: "0-5",
     country: "GB",
-    error: false,
+    error: false
   };
 
   @Watch("position")
   onPositionChanged(currVal: Position) {
     weatherAPI.getCurrentWeather(currVal).then((response: any) => {
-      if(response.error){
+      if (response.error) {
         this.weatherData.error = true;
         return;
       }
-      
+
       this.weatherData.error = false;
       this.weatherData.date = "Now";
       this.weatherData.weather = response.data.weather[0].description;
@@ -126,7 +124,7 @@ export default class Home extends Vue {
     };
   }
 
-  get notifyProgress():number{
+  get notifyProgress(): number {
     return this.maxNotifyLifetime - this.notifyCountdown + 1;
   }
 }

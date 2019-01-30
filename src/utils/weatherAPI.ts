@@ -5,31 +5,31 @@ const APPID = "e7c35c7ebb985f498eceae6b60aac2de";
 const rootUrl = "http://api.openweathermap.org/data/2.5/";
 const weatherAPI = {
   async getCurrentWeather(position: Position) {
-    try{
+    try {
       return await axios.get(
         `${rootUrl}weather?lat=${position.lat}&lon=${
           position.lng
         }&units=metric&APPID=${APPID}`
       );
-    }catch(error){
+    } catch (error) {
       return {
-        status: 'Error fetching Current Forecast',
-        error,
-      }
+        status: "Error fetching Current Forecast",
+        error
+      };
     }
   },
   async getFiveDayForecast(position: Position) {
-    try{
+    try {
       return await axios.get(
         `${rootUrl}forecast?lat=${position.lat}&lon=${
           position.lng
         }&units=metric&APPID=${APPID}`
       );
-    }catch(error){
+    } catch (error) {
       return {
-        status: 'Error fetching FiveDayForecast',
-        error,
-      }
+        status: "Error fetching FiveDayForecast",
+        error
+      };
     }
   },
 

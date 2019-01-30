@@ -1,6 +1,5 @@
 <template>
-  
-  <div >
+  <div>
     <div v-if="errorPresent">
       <h4>Apologies but we have encountered an error during the fetch</h4>
     </div>
@@ -80,7 +79,7 @@ export default class WeatherComponent extends Vue {
     return this.country;
   }
 
-  get errorPresent(): boolean{
+  get errorPresent(): boolean {
     return this.error;
   }
 }

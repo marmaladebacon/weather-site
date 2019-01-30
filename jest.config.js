@@ -8,7 +8,7 @@ module.exports = {
   },
   moduleNameMapper: {
     "^@/(.*)$": "<rootDir>/src/$1",
-    "^lodash-es$": "lodash",
+    "^lodash-es$": "lodash"
   },
   snapshotSerializers: ["jest-serializer-vue"],
   testMatch: [
@@ -20,5 +20,5 @@ module.exports = {
       babelConfig: true
     }
   },
-  transformIgnorePatterns: ["<rootDir>/node_modules/(?!lodash-es)"],
+  transformIgnorePatterns: ["<rootDir>/node_modules/(?!lodash-es)"]
 };
