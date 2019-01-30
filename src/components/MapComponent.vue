@@ -8,7 +8,6 @@
 import Vue from "vue";
 import Component from "vue-class-component";
 import {} from "googlemaps";
-import mapComponentStoreModule from "./mapComponentStoreModule";
 import { Prop } from "vue-property-decorator";
 import { namespace } from "vuex-class";
 
@@ -32,16 +31,14 @@ export default class MapComponent extends Vue {
 
     if ("geolocation" in navigator) {
       navigator.geolocation.getCurrentPosition((position: any) => {
-        console.log(position);
+        
         const pos = {
           lat: position.coords.latitude,
           lng: position.coords.longitude
         };
         this.map.setZoom(6);
 
-        this.map.addListener("click", (evt: any) => {
-          console.log(evt);
-
+        this.map.addListener("click", (evt: any) => {          
           this.placeMarkerAndPanTo(
             { lat: evt.latLng.lat(), lng: evt.latLng.lng() },
             this.map
@@ -64,11 +61,7 @@ export default class MapComponent extends Vue {
     });
     this.map.panTo(latLng);
     this.marker.addListener("click", () => {
-      if (this.map.getZoom() > 10) {
-        this.map.setZoom(12);
-      } else {
-        this.map.setZoom(5);
-      }
+      this.map.setZoom(5);      
     });
     this.$store.commit(`setPosition`, latLng);
   }

@@ -10,12 +10,17 @@ const state: RootState = {
   position: {
     lat: 0,
     lng: 0
-  }
+  },
+  savedPositions:[],
 };
 
 const mutations: MutationTree<RootState> = {
   setPosition(state, position: Position) {
     state.position = position;
+  },
+
+  addToSavedPositions(state, position: Position) {
+    state.savedPositions.push(position);
   }
 };
 

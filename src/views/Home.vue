@@ -1,6 +1,11 @@
 <template>
   <div>
     <div class="pos-debug">{{ position.lat }},{{ position.lng }}</div>
+    <div class="btn-save">
+      <b-button v-on:click="saveLocation" :size="sm" :variant="primary">
+        Save Location
+      </b-button>
+    </div>
     <b-container>
       <b-row>
         <b-col cols="7">
@@ -20,7 +25,7 @@
         </b-col>
       </b-row>
       <b-row class="five-day">
-        <FiveDayForecastComponent></FiveDayForecastComponent>
+        <FiveDayForecastComponent :position="position"></FiveDayForecastComponent>
       </b-row>
     </b-container>
   </div>
@@ -56,7 +61,7 @@ export default class Home extends Vue {
   @Watch("position")
   onPositionChanged(currVal: Position) {
     weatherAPI.getCurrentWeather(currVal).then((response: any) => {
-      this.weatherData.date = "Now";
+      this.weatherData.date = 'Now';
       this.weatherData.weather = response.data.weather[0].description;
       this.weatherData.icon = response.data.weather[0].icon;
       this.weatherData.country = response.data.sys.country
@@ -65,9 +70,19 @@ export default class Home extends Vue {
       this.weatherData.city = response.data.name;
     });
   }
+
+  saveLocation(){    
+    this.$store.commit('addToSavedPositions', {lat: this.position.lat, lng: this.position.lng});
+  }
 }
 </script>
 <style scoped>
+.btn-save {
+  z-index: 1000;
+  position: absolute;
+  right: 32.5vw;
+  top: 58vh;
+}
 .pos-debug {
   position: absolute;
   right: 5vw;

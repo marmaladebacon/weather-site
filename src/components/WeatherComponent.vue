@@ -2,7 +2,7 @@
   <div>
     <b-card :title="date" :img-src="iconUrl" :style="style" img-top>
       <p class="card-text smaller-text" :style="textStyle">
-        {{ weather }} {{ cityName }}
+        {{ weather }} {{ cityName }}<br/>
         {{ countryName }}
       </p>
     </b-card>
@@ -40,7 +40,7 @@ export default class WeatherComponent extends Vue {
   city!: string;
 
   @Prop(String)
-  country: string = "GB";
+  country!: string;
 
   get iconUrl() {
     return weatherAPI.getIconUrl(this.icon);

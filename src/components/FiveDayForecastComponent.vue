@@ -20,8 +20,7 @@
 </template>
 <script lang="ts">
 import Vue from "vue";
-import { Component, Watch } from "vue-property-decorator";
-import { State } from "vuex-class";
+import { Component, Watch, Prop } from "vue-property-decorator";
 import { Position, WeatherBlob } from "../store/types";
 import { get } from "lodash-es";
 import weatherAPI from "../utils/weatherAPI";
@@ -33,17 +32,26 @@ import WeatherComponent from "./WeatherComponent.vue";
   }
 })
 export default class FiveDataForecastComponent extends Vue {
-  weatherDataItems: WeatherBlob[] = [];
-  @State position!: Position;
-  mounted() {}
+  weatherDataItems: WeatherBlob[] = [];  
+  @Prop(Object)
+  position!: Position;
+  mounted() {
+    console.log('Mounted Five DB');
+    console.log(this.position);
+    this.updateCard(this.position);
+  }
 
   @Watch("position")
   onPositionChanged(currPosition: Position) {
-    console.log(this.position);
+    this.updateCard(currPosition);
+    
+  }
+
+  updateCard(currPosition: Position){
     weatherAPI
       .getFiveDayForecast({ lat: currPosition.lat, lng: currPosition.lng })
       .then(response => {
-        console.log(response);
+        
         const list = response.data.list;
 
         let city = get(response.data, ["city", "name"], "");
@@ -64,7 +72,7 @@ export default class FiveDataForecastComponent extends Vue {
         });
 
         result.unshift(list[0]);
-        console.log(result);
+        
         this.weatherDataItems = result.map((e: any) => {
           return {
             date: e.dt_txt,
@@ -74,8 +82,6 @@ export default class FiveDataForecastComponent extends Vue {
             country
           };
         });
-        console.log("WEATHER ITEMS");
-        console.log(this.weatherDataItems);
       });
   }
 }
