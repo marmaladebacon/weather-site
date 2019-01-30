@@ -32,8 +32,6 @@ export default class FiveDataForecastComponent extends Vue {
   @Prop(Object)
   position!: Position;
   mounted() {
-    console.log("Mounted Five DB");
-    console.log(this.position);
     this.updateCard(this.position);
   }
 
@@ -43,7 +41,7 @@ export default class FiveDataForecastComponent extends Vue {
   }
 
   updateCard(currPosition: Position) {
-    weatherAPI
+    return weatherAPI
       .getFiveDayForecast({ lat: currPosition.lat, lng: currPosition.lng })
       .then(response => {
         const list = response.data.list;
@@ -71,8 +69,8 @@ export default class FiveDataForecastComponent extends Vue {
         result.unshift(list[0]);
 
         // observed getting more than 5 results, truncate it
-        if(result.length > 5){
-          result = result.slice(0,5)
+        if (result.length > 5) {
+          result = result.slice(0, 5);
         }
 
         this.weatherDataItems = result.map((e: any) => {

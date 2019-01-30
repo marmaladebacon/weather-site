@@ -39,12 +39,12 @@ export default class MapComponent extends Vue {
 
         this.placeMarkerAndPanTo(pos, this.map);
       });
-    }else{
+    } else {
       // default to a fixed location if we cannot
       const pos = {
         lat: 61.180059,
         lng: -149.822075
-      }
+      };
       this.map.setZoom(6);
       this.placeMarkerAndPanTo(pos, this.map);
     }
@@ -75,9 +75,8 @@ export default class MapComponent extends Vue {
 }
 </script>
 <style scoped>
-
-.map{
-  width:32vw;
+.map {
+  width: 32vw;
   height: 60vh;
 }
 
@@ -87,5 +86,4 @@ export default class MapComponent extends Vue {
     height: 60vh;
   }
 }
-
 </style>

@@ -1,16 +1,23 @@
 <template>
   <div>
-    <b-alert class="fixed-alert"
-            :show="notifyCountdown"
-             dismissible
-             variant="success"
-             @dismissed="notifyCountdown=0"
-             @dismiss-count-down="countDownChanged">
-      <p>Saved location {{position.lat}}, {{position.lng}} {{countDown}} seconds...</p>
-      <b-progress variant="warning"
-                  :max="maxNotifyLifetime"
-                  :value="notifyCountdown"
-                  height="4px">
+    <b-alert
+      class="fixed-alert"
+      :show="notifyCountdown"
+      dismissible
+      variant="success"
+      @dismissed="notifyCountdown = 0"
+      @dismiss-count-down="countDownChanged"
+    >
+      <p>
+        Saved location {{ position.lat }}, {{ position.lng }}
+        {{ countDown }} seconds...
+      </p>
+      <b-progress
+        variant="warning"
+        :max="maxNotifyLifetime"
+        :value="notifyCountdown"
+        height="4px"
+      >
       </b-progress>
     </b-alert>
     <div class="pos-debug">{{ savedPosition.lat }},{{ savedPosition.lng }}</div>
@@ -39,7 +46,6 @@
         ></FiveDayForecastComponent>
       </b-row>
     </b-container>
-
   </div>
 </template>
 
@@ -65,9 +71,9 @@ export default class Home extends Vue {
   maxNotifyLifetime: number = 2;
   notifyCountdown: number = 0;
   showDismissibleAlert: boolean = false;
-  savedPosition:Position = {
-    lat:0,
-    lng:0,
+  savedPosition: Position = {
+    lat: 0,
+    lng: 0
   };
 
   weatherData: WeatherBlob = {
@@ -104,11 +110,11 @@ export default class Home extends Vue {
     this.notifyUserLocationSaved(this.position);
   }
 
-  countDownChanged (notifyCountdown:number) {
+  countDownChanged(notifyCountdown: number) {
     this.notifyCountdown = notifyCountdown;
   }
 
-  notifyUserLocationSaved (position:Position) {
+  notifyUserLocationSaved(position: Position) {
     this.notifyCountdown = this.maxNotifyLifetime;
     this.savedPosition = {
       lat: this.position.lat,
@@ -119,7 +125,7 @@ export default class Home extends Vue {
 </script>
 <style scoped>
 .fixed-alert {
-  position:fixed;
+  position: fixed;
   top: 0vh;
   left: 0vw;
   width: 100%;
@@ -130,7 +136,7 @@ export default class Home extends Vue {
   right: 32.5vw;
   top: 58vh;
 }
-@media (min-width: 1080px){
+@media (min-width: 1080px) {
   .btn-save {
     right: 40vw;
   }

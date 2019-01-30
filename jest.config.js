@@ -7,7 +7,8 @@ module.exports = {
     "^.+\\.tsx?$": "ts-jest"
   },
   moduleNameMapper: {
-    "^@/(.*)$": "<rootDir>/src/$1"
+    "^@/(.*)$": "<rootDir>/src/$1",
+    "^lodash-es$": "lodash",
   },
   snapshotSerializers: ["jest-serializer-vue"],
   testMatch: [
@@ -18,5 +19,6 @@ module.exports = {
     "ts-jest": {
       babelConfig: true
     }
-  }
+  },
+  transformIgnorePatterns: ["<rootDir>/node_modules/(?!lodash-es)"],
 };
