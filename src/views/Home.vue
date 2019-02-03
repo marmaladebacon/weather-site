@@ -17,29 +17,35 @@
       >
       </b-progress>
     </b-alert>
-    <div class="btn-save">
-      <b-button v-on:click="saveLocation" :size="sm" :variant="primary">
-        Save Location
-      </b-button>
-    </div>
+
     <b-container>
       <b-row>
         <b-col cols="7">
           <MapComponent namespace="mainMapComponent"></MapComponent>
         </b-col>
-        <b-col cols="2" align-v="center" align-h="start">
+        <b-col cols="2" align-h="start">
           <WeatherComponent
             v-bind="weatherData"
             width="25"
             height="50"
             font-size="0.8"
+            style="padding-top: 20%;"
           ></WeatherComponent>
         </b-col>
       </b-row>
-      <b-row class="five-day">
-        <FiveDayForecastComponent
-          :position="position"
-        ></FiveDayForecastComponent>
+      <b-row class="five-day" style="padding-left:0px">
+        <b-col cols="7">
+          <FiveDayForecastComponent
+            :position="position"
+          ></FiveDayForecastComponent>
+        </b-col>
+        <b-col cols="2">
+          <div class="btn-save">
+            <b-button v-on:click="saveLocation" :size="sm" :variant="primary">
+              Save Location
+            </b-button>
+          </div>
+        </b-col>
       </b-row>
     </b-container>
   </div>
@@ -138,9 +144,7 @@ export default class Home extends Vue {
 }
 .btn-save {
   z-index: 1000;
-  position: absolute;
-  right: 32.5vw;
-  top: 58vh;
+  padding-top: 30%;
 }
 @media (min-width: 1080px) {
   .btn-save {

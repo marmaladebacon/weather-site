@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="iframe-container">
     <div ref="map" class="map"></div>
   </div>
 </template>
@@ -85,5 +85,24 @@ export default class MapComponent extends Vue {
     width: 45vw;
     height: 60vh;
   }
+}
+
+.iframe-container {
+  position: relative;
+  width: 100%;
+  padding-bottom: 56.25%; /* Ratio 16:9 ( 100%/16*9 = 56.25% ) */
+  padding-left: 0%;
+}
+.iframe-container > * {
+  display: block;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 90%;
 }
 </style>
