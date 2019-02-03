@@ -1,6 +1,6 @@
 import Vue from "vue";
 import Vuex from "vuex";
-import {GetterTree} from "vuex";
+import { GetterTree } from "vuex";
 import { MutationTree } from "vuex";
 import { RootState, Position } from "./types";
 
@@ -27,7 +27,7 @@ export const mutations: MutationTree<RootState> = {
 
 export const getters: GetterTree<RootState, any> = {
   position: state => state.position,
-  savedPositions: state => state.savedPositions, 
+  savedPositions: state => state.savedPositions
 };
 
 export default new Vuex.Store({

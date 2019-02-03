@@ -24,5 +24,5 @@ module.exports = {
     }
   },
   transformIgnorePatterns: ["<rootDir>/node_modules/(?!lodash-es)"],
-  "verbose": true
+  verbose: true
 };
