@@ -4,7 +4,10 @@ module.exports = {
     "^.+\\.vue$": "vue-jest",
     ".+\\.(css|styl|less|sass|scss|svg|png|jpg|ttf|woff|woff2)$":
       "jest-transform-stub",
-    "^.+\\.tsx?$": "ts-jest"
+    "^.+\\.tsx?$": "ts-jest",
+    "^.+\\.js$": "<rootDir>/node_modules/babel-jest",
+    ".*\\.(vue)$": "<rootDir>/node_modules/vue-jest",
+    "^.+\\.ts$": "<rootDir>/node_modules/ts-jest/preprocessor"
   },
   moduleNameMapper: {
     "^@/(.*)$": "<rootDir>/src/$1",
@@ -20,5 +23,6 @@ module.exports = {
       babelConfig: true
     }
   },
-  transformIgnorePatterns: ["<rootDir>/node_modules/(?!lodash-es)"]
+  transformIgnorePatterns: ["<rootDir>/node_modules/(?!lodash-es)"],
+  "verbose": true
 };

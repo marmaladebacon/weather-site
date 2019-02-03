@@ -26,9 +26,9 @@
         <b-col cols="2" align-h="start">
           <WeatherComponent
             v-bind="weatherData"
-            width="25"
-            height="50"
-            font-size="0.8"
+            :width="25"
+            :height="50"
+            :font-size="0.8"
             style="padding-top: 20%;"
           ></WeatherComponent>
         </b-col>
