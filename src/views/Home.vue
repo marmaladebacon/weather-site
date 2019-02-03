@@ -20,10 +20,10 @@
 
     <b-container>
       <b-row>
-        <b-col cols="7" style="padding-left:0px">
+        <b-col cols="7">
           <MapComponent namespace="mainMapComponent"></MapComponent>
         </b-col>
-        <b-col cols="2"  align-h="start">
+        <b-col cols="2" align-h="start">
           <WeatherComponent
             v-bind="weatherData"
             width="25"
@@ -39,8 +39,8 @@
             :position="position"
           ></FiveDayForecastComponent>
         </b-col>
-        <b-col cols="2"  >
-          <div class="btn-save" >
+        <b-col cols="2">
+          <div class="btn-save">
             <b-button v-on:click="saveLocation" :size="sm" :variant="primary">
               Save Location
             </b-button>
@@ -162,5 +162,4 @@ export default class Home extends Vue {
   padding-top: 5px;
   height: 10vh;
 }
-
 </style>
